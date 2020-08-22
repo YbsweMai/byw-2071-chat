@@ -1,7 +1,15 @@
-const chat = require('./chat')
-const chat = require('./chat')
+const controller = require('../controller/chat')
 
-module.exports = (router)=>{
+module.exports =  (router) => {
+  router.get('/', controller.login)
 
-  chat(router)
+  router.post('/chat/login', controller.chatLogin)
+
+  router.get('/chat', controller.chat)
+
+  router.post('/chat/addContent', controller.addContent)
+
+  router.get('/chat/getContent', controller.getContent)
+
+
 }

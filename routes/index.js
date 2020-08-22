@@ -1,9 +1,7 @@
-module.exports =  (router) => {
-  router.get('/welcome', async function (ctx, next) {
-    ctx.state = {
-      title: 'koa2 title'
-    } 
+const chat = require('./chat')
 
-    await ctx.render('index', {title: ctx.state})
-  })
+module.exports =  (router)=>{
+
+  chat(router)
+
 }

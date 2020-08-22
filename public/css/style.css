@@ -1,8 +1,28 @@
-body {
+/* body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+} */
+
+body{
+  padding: 0;
+  margin: 0;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 16px;
+  color: #3C3B3B;
+  overflow: hidden;
+}
+
+.clearFix::after{  
+  content: '';
+  display: block;
+  /* div原本是block 但是after之后就变成了行内元素 所以还要再改回block */
+  clear: both;
+}
+
+input{
+  outline: none;
 }
