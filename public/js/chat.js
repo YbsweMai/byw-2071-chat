@@ -3,11 +3,15 @@ let inputEle = document.getElementsByClassName('chat-input')[0]
 
 let timer
 
+let originData
+
 stopTimer()
 
 longPolling()
 
 sorollToBottom()
+
+getOriginData()
 
 
 inputEle.onkeydown = function(e){
@@ -72,7 +76,7 @@ function renderChat(contents){
   $('.chat-content').html(html)
 }
 
-// 长轮询问 （主动发送请求）
+// 长轮询问 （主动发送请求刷新）
 
 function longPolling(){
 
@@ -86,11 +90,49 @@ function longPolling(){
       success:(result)=>{
 
         renderChat(result.contents)
+        compare(result.contents)
       }
     })
-  },2000)
+  },200)
 }
 
+
+/* 
+* 获取旧数据
+*/
+function getOriginData(){
+  $.ajax({
+    type:'get',
+    url:'http://localhost:3000/chat/getContent',
+    data:{
+      
+    },
+    success:(result)=>{
+
+      originData = result.contents
+    }
+  })
+}
+
+
+/* 比较数据 */
+function compare(contents){
+
+  let originTime = originData[originData.length - 1].createdAt
+
+  let afterFilter = contents.filter((item)=>{
+
+    return moment(item.createdAt).isAfter(moment(originTime))
+  })
+
+  if(afterFilter.length > 0){
+    alert('有新消息')
+  }
+
+  originData = contents
+}
+
+/* 停止刷新 */
 function stopTimer(){
 
   if(timer){

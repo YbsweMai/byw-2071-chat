@@ -90,6 +90,8 @@ async function addContent(ctx,next){
   ctx.response.body = data
 }
 
+
+/* 获取聊天记录 */
 async function getContent(ctx,next){
 
   const contents = await services.getContent()
@@ -97,6 +99,12 @@ async function getContent(ctx,next){
   ctx.response.body = {
     contents
   }
+}
+
+/* 获取旧聊天记录*/
+
+async function getOriginData(ctx,next){
+  const contens = 
 }
 
 module.exports = {
